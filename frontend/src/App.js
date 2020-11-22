@@ -1,7 +1,20 @@
 import React, {useState } from 'react';
-import { Box, Button, Collapsible, Heading, Grommet, Layer, ResponsiveContext } from 'grommet';
+import { Box, Button, Collapsible, Heading, Grommet, Layer, ResponsiveContext, DataTable } from 'grommet';
+import {
+  CheckBox,
+  Form,
+  FormField,
+  MaskedInput,
+  RadioButtonGroup,
+  RangeInput,
+  Select,
+  TextArea,
+  TextInput,
+} from 'grommet';
 import { FormClose, Notification } from 'grommet-icons';
+import { grommet } from 'grommet/themes';
 
+/************** CONFIG and Input ********************/ 
 const theme = {
   global: {
    colors: {
@@ -14,7 +27,7 @@ const theme = {
     },
   },
 };
-
+/********************* Screens ***************************/ 
 const AppBar = (props) => (
   <Box
     tag='header'
@@ -29,70 +42,51 @@ const AppBar = (props) => (
   />
 );
 
-const App = () => {
+// Aggregate Test View
+const AggTestView = (props) => {
 
-  // App State
-  const [showSidebar, setShowSidebar] = useState(false);
+  const columns = [];
+  const DATA = [];
 
   return (
-    <Grommet theme={theme} full themeMode="dark">
-      <ResponsiveContext.Consumer>
-        {size => (
-          <Box fill>
-          <AppBar> 
-            <Heading level='3' margin='none'>COVID Dashboard</Heading>
-            <Button
-              icon={<Notification />}
-              onClick={() => setShowSidebar(!showSidebar)}/>
-          </AppBar>
-          {/* Main Body */}
-          
-          <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-            <Box flex align='center' justify='center'>
-              app body
-          </Box>
-          {(!showSidebar || size !== 'small') ? (
-            <Collapsible direction="horizontal">
-            <Box
-              flex
-              width='medium'
-              background='light-2'
-              elevation='small'
-              align='center'
-              justify='center'>
-              sidebar
-            </Box>
-          </Collapsible>
-        ): (
-          <Layer>
-            <Box
-              background='light-2'
-              tag='header'
-              justify='end'
-              align='center'
-              direction='row'
-            >
-              <Button
-                icon={<FormClose />}
-                onClick={() => setShowSidebar(false)}
-              />
-            </Box>
-            <Box
-              fill
-              background='light-2'
-              align='center'
-              justify='center'
-            >
-              sidebar
-            </Box>
-          </Layer>
-        )}
-        </Box>
+    <div>
+      <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
       </Box>
-      )}
-    </ResponsiveContext.Consumer>
-  </Grommet>
+      
+      <DataTable
+        columns={columns}
+        data={DATA}
+        step={10}
+        onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
+      />
+    </div>
   );
+}
+
+/************** Global App ***************************/ 
+class App extends React.Component {
+
+  // App State
+  // const [showSidebar, setShowSidebar] = useState(false);
+
+  render() {
+    return (
+      <Grommet theme={grommet} full themeMode="dark">
+        {/* Title Bar */}
+        <Box fill>
+        <AppBar> 
+          <Heading level='3' margin='none'>COVID Dashboard</Heading>
+        </AppBar>
+
+        {/* Main Body */}
+        <AggTestView>
+        </AggTestView>
+
+        
+      </Box>
+    </Grommet>
+    );
+  }
 }
 
 export default App;
