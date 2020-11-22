@@ -2,32 +2,36 @@ import React, {useState } from 'react';
 import { Box, Button, Collapsible, Heading, Grommet, Layer, ResponsiveContext, DataTable } from 'grommet';
 import {
   CheckBox,
+  DateInput,
   Form,
   FormField,
   MaskedInput,
+  Meter,
   RadioButtonGroup,
   RangeInput,
   Select,
+  Text,
   TextArea,
   TextInput,
 } from 'grommet';
 import { FormClose, Notification } from 'grommet-icons';
 import { grommet } from 'grommet/themes';
+import { deepMerge } from 'grommet/utils';
+
+import AggTestView from './AggTestView.js'
 
 /************** CONFIG and Input ********************/ 
-const theme = {
+
+
+const customTheme = deepMerge(grommet, {
   global: {
    colors: {
      brand: '#183256',
-   },
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
     },
   },
-};
-/********************* Screens ***************************/ 
+});
+
+/********************* Top Bar ***************************/ 
 const AppBar = (props) => (
   <Box
     tag='header'
@@ -42,26 +46,6 @@ const AppBar = (props) => (
   />
 );
 
-// Aggregate Test View
-const AggTestView = (props) => {
-
-  const columns = [];
-  const DATA = [];
-
-  return (
-    <div>
-      <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-      </Box>
-      
-      <DataTable
-        columns={columns}
-        data={DATA}
-        step={10}
-        onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
-      />
-    </div>
-  );
-}
 
 /************** Global App ***************************/ 
 class App extends React.Component {
@@ -71,15 +55,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grommet theme={grommet} full>
+      <Grommet theme={customTheme} full>
         {/* Title Bar */}
         <Box fill>
         <AppBar> 
-          <Heading level='3' margin='none'>COVID Dashboard</Heading>
+          <Heading level='3' margin='none'>COVID Dashboard | CS4400</Heading>
         </AppBar>
 
         {/* Main Body */}
-        <AggTestView>
+        <AggTestView props={'state'}>
         </AggTestView>
 
 
