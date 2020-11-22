@@ -7,18 +7,93 @@
 
 
 <!-- Accept a File Upload -->
-<form action="{{ url_for('main') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ url_for('agg_test_results') }}" method="POST" enctype="multipart/form-data">
   <fieldset>
-    <legend>Zoom Transcript Upload</legend>
+    <legend>agg results</legend>
   
 
     <br>
-    <label for="friendship_scale"> How Well do the Conversation Participants Know Eachother from 1 to 10?</label>
+    <label for="location">Aggregate results</label>
     <input name="location" type="text" id="location">
+    <label for="housing"> Housing?</label>
+    <input name="housing" type="text" id="housing">
+    <label for="testing site"> testing site?</label>
+    <input name="testingsite" type="text" id="testingsite">
+    <label for="start date"> start date?</label>
+    <input name="startDate" type="text" id="startDate">
+    <label for="End date"> End date?</label>
+    <input name="endDate" type="text" id="endDate">
+    <br>
+    <input name="submit" type="Submit">
+  </fieldset>
+</form> 
+<br>
+
+
+<form action="{{ url_for('register_student') }}" method="POST" enctype="multipart/form-data">
+  <fieldset>
+    <legend>register student</legend>
+  
+
+    <br>
+    <label for="username">username</label>
+    <input name="username" type="text" id="username">
+    <label for="email"> email?</label>
+    <input name="email" type="text" id="email">
+    <label for="fname"> fname?</label>
+    <input name="fname" type="text" id="fname">
+    <label for="lname"> lname?</label>
+    <input name="lname" type="text" id="lname">
+    <label for="location"> location?</label>
+    <input name="location" type="text" id="location">
+    <label for="housing_type"> housingtype?</label>
+    <input name="housing_type" type="text" id="housing_type">
+    <label for="password"> password?</label>
+    <input name="password" type="text" id="password">
     <br>
     <input name="submit" type="Submit">
   </fieldset>
 </form>
-<br>
+
+<form action="{{ url_for('register_employee') }}" method="POST" enctype="multipart/form-data">
+  <fieldset>
+    <legend>register employee</legend>
+  
+    <br>
+    <label for="emp_username">emp_username</label>
+    <input name="emp_username" type="text" id="emp_username">
+    <label for="emp_email"> email?</label>
+    <input name="emp_email" type="text" id="email">
+    <label for="emp_fname"> emp_fname?</label>
+    <input name="emp_fname" type="text" id="emp_fname">
+    <label for="emp_lname"> lname?</label>
+    <input name="emp_lname" type="text" id="emp_lname">
+    <label for="phone"> phone?</label>
+    <input name="phone" type="text" id="phone">
+    <label for="is_lab_tech"> is labtech?</label>
+    <input name="is_lab_tech" type="text" id="is_lab_tech">
+    <label for="is_site_tester"> is site tester?</label>
+    <input name="is_site_tester" type="text" id="is_site_tester">
+    <label for="emp_password"> emp_password?</label>
+    <input name="emp_password" type="text" id="emp_password">
+    <br>
+    <input name="submit" type="Submit">
+  </fieldset>
+</form>
+
+<form action="{{ url_for('login') }}" method="POST" enctype="multipart/form-data">
+  <fieldset>
+    <legend>login</legend>
+  
+
+    <br>
+    <label for="username">username</label>
+    <input name="username" type="text" id="username">
+    <label for="password"> password?</label>
+    <input name="password" type="text" id="password">
+    <br>
+    <input name="submit" type="Submit">
+  </fieldset>
+</form>
 
 </html>
