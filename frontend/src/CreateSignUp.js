@@ -61,9 +61,7 @@ class CreateSignUp extends React.Component  {
   ];
 
   // Hard Coding Options
-  const location_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
-  const housing_options = [];
-  const testing_site_options = [];
+  const testing_site_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
 
   return (
     <Box 
@@ -80,57 +78,48 @@ class CreateSignUp extends React.Component  {
           gap="medium"
           justify="center"  
           fill="horizontal">
-          <FormField name="location-select" htmlfor="location-select" label="Location:">
-            <Select options={location_options} id="location-select" name="location-select" />
+          <FormField name="location-select" htmlfor="location-select" label="Testing Site:">
+            <Select options={testing_site_options} id="location-select" name="location-select" />
           </FormField>
 
-          <FormField name="housing-select" htmlfor="housing-select" label="Housing:">
-            <Select options={housing_options} id="housing-select" name="housing-select" />
+          <FormField name="date-start" htmlfor="date-start" label="Date:">
+            <DateInput
+              format="mm/dd/yyyy"
+              value={(new Date()).toISOString()}
+              onChange={({ value }) => {}}
+            />
           </FormField>
 
           <FormField name="testing-select" htmlfor="testing-select" label="Testing Sites:">
-            <Select options={testing_site_options} id="testing-select" name="testing-select" />
+            <MaskedInput
+              mask={[
+                {
+                  length: [1, 2],
+                  options: Array.from({ length: 12 }, (v, k) => k + 1),
+                  regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                  placeholder: 'hh',
+                },
+                { fixed: ':' },
+                {
+                  length: 2,
+                  options: ['00', '15', '30', '45'],
+                  regexp: /^[0-5][0-9]$|^[0-9]$/,
+                  placeholder: 'mm',
+                },
+                { fixed: ' ' },
+                {
+                  length: 2,
+                  options: ['am', 'pm'],
+                  regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
+                  placeholder: 'ap',
+                },
+              ]}
+              value={value}
+              onChange={() => {}}
+              id="testing-select" 
+              name="testing-select" />
           </FormField>
         </Box>
-
-        {/* Date Selection */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal">
-          <FormField name="date-start" htmlfor="date-start" label="Date Processed Start:">
-            <DateInput
-              format="mm/dd/yyyy"
-              value={(new Date()).toISOString()}
-              onChange={({ value }) => {}}
-            />
-          </FormField>
-
-          <FormField name="date-end" htmlfor="date-end" label="Date Processed End:">
-            <DateInput
-              format="mm/dd/yyyy"
-              value={(new Date()).toISOString()}
-              onChange={({ value }) => {}}
-            />
-          </FormField>  
-        </Box>
-
-        {/* Present Data */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal">
-        
-          <DataTable
-            columns={columns}
-            data={SAMPLE_DATA}
-            step={10}
-            onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
-          />
-        </Box>
-        
 
         {/* Buttons */}
         <Box 
@@ -138,15 +127,16 @@ class CreateSignUp extends React.Component  {
           gap="medium"
           justify="center"  
           fill="horizontal">
-          <Button type="submit" primary label="Filter" />
-          <Button type="reset" label="Reset" />
+          <Button type="submit" primary label="Create Appointment" />
+
+          <Button 
+            label="Go Home" 
+            margin="large"
+            onClick={() => {this.props.onPageChange('Home Page')}}/>
         </Box>
       </Form>
 
-      <Button 
-        label="Go Home" 
-        margin="large"
-        onClick={() => {this.props.onPageChange('Home Page')}}/>
+      
     </Box>
   );
   }

@@ -30,40 +30,35 @@ class ViewMyResults extends React.Component  {
   render() {
     const columns = [
     {
-      property: 'status',
-      header: <Text>Test Status</Text>,
+      property: 'test_id',
+      header: <Text>Test ID#</Text>,
       primary: true,
     },
-    {property: 'total_tests',
-    header: 'Number of Total Tests',
+    {
+      property: 'timeslot_date',
+      header: 'Timeslot Date',
     },
-    {property: 'cases_percent',
-    header: 'Percent of Total Cases',
-    render: datum => (
-        <Box pad={{ vertical: 'xsmall' }}>
-          <Meter
-            values={[{ value: datum.percent }]}
-            thickness="small"
-            size="small"
-          />
-        </Box>
-      ),
+    {
+      property: 'process_date',
+      header: 'Date Processed',
     },
-    {property: 'percent',
-    header: 'Percent of Total Cases',
+    {
+      property: 'pool_status',
+      header: 'Pool Status',
+    },
+    {
+      property: 'status',
+      header: 'Status',
     }];
 
   const SAMPLE_DATA = [
-    { status: 'Total', total_tests: 7000, percent: 100},
-    { status: 'Positive', total_tests: 450, percent: 6.43},
-    { status: 'Negative', total_tests: 6550, percent: 93.57},
-    { status: 'Pending', total_tests: 0, percent: 0},
+    { test_id: 1, timeslot_date: '8/19/20', process_date: '8/20/20', pool_status: 'positive', status: 'negative'},
+    { test_id: 2, timeslot_date: '8/19/20', process_date: '8/20/20', pool_status: 'positive', status: 'negative'},
+    { test_id: 3, timeslot_date: '8/19/20', process_date: '8/20/20', pool_status: 'positive', status: 'negative'},
   ];
 
   // Hard Coding Options
-  const location_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
-  const housing_options = [];
-  const testing_site_options = [];
+  const status_options = ['All', 'Pending', 'Positive', 'Negative'];
 
   return (
     <Box 
@@ -80,25 +75,10 @@ class ViewMyResults extends React.Component  {
           gap="medium"
           justify="center"  
           fill="horizontal">
-          <FormField name="location-select" htmlfor="location-select" label="Location:">
-            <Select options={location_options} id="location-select" name="location-select" />
+          <FormField name="location-select" htmlfor="location-select" label="Status:">
+            <Select options={status_options} id="location-select" name="location-select" />
           </FormField>
 
-          <FormField name="housing-select" htmlfor="housing-select" label="Housing:">
-            <Select options={housing_options} id="housing-select" name="housing-select" />
-          </FormField>
-
-          <FormField name="testing-select" htmlfor="testing-select" label="Testing Sites:">
-            <Select options={testing_site_options} id="testing-select" name="testing-select" />
-          </FormField>
-        </Box>
-
-        {/* Date Selection */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal">
           <FormField name="date-start" htmlfor="date-start" label="Date Processed Start:">
             <DateInput
               format="mm/dd/yyyy"
