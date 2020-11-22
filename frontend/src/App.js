@@ -2,32 +2,50 @@ import React, {useState } from 'react';
 import { Box, Button, Collapsible, Heading, Grommet, Layer, ResponsiveContext, DataTable } from 'grommet';
 import {
   CheckBox,
+  DateInput,
   Form,
   FormField,
   MaskedInput,
+  Meter,
   RadioButtonGroup,
   RangeInput,
   Select,
+  Text,
   TextArea,
   TextInput,
 } from 'grommet';
-import { FormClose, Notification } from 'grommet-icons';
+
+import { FormClose, Home, Notification } from 'grommet-icons';
 import { grommet } from 'grommet/themes';
+import { deepMerge } from 'grommet/utils';
+
+// Views
+import ViewAggregateResults from './ViewAggregateResults.js'
+import ViewDailyResults from './ViewDailyResults.js'
+import ViewMyResults from './ViewMyResults.js'
+
+// Creation Pages
+import CreateSignUp from './CreateSignUp.js'
+
+// Homepages
+import HomeStudent from './HomeStudent.js'
+import HomeAdmin from './HomeAdmin.js'
+import HomeTechnician from './HomeTechnician.js'
+import HomeTester from './HomeTester.js'
+import HomeTechTester from './HomeTechTester.js'
 
 /************** CONFIG and Input ********************/ 
-const theme = {
+
+
+const customTheme = deepMerge(grommet, {
   global: {
    colors: {
      brand: '#183256',
-   },
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
     },
   },
-};
-/********************* Screens ***************************/ 
+});
+
+/********************* Top Bar ***************************/ 
 const AppBar = (props) => (
   <Box
     tag='header'
@@ -42,45 +60,74 @@ const AppBar = (props) => (
   />
 );
 
-// Aggregate Test View
-const AggTestView = (props) => {
-
-  const columns = [];
-  const DATA = [];
-
-  return (
-    <div>
-      <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-      </Box>
-      
-      <DataTable
-        columns={columns}
-        data={DATA}
-        step={10}
-        onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
-      />
-    </div>
-  );
-}
 
 /************** Global App ***************************/ 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_type: 'Student',
+      current_page: 'Home Page'
+    }
 
-  // App State
-  // const [showSidebar, setShowSidebar] = useState(false);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillUnmount() {
+
+  }
+
+  handlePageChange(page) {
+    this.setState({current_page: page})
+  }
+  
+  
 
   render() {
+
+    let homepage;
+
+    switch (this.state.user_type) {
+      case 'Student':
+        homepage = <HomeStudent values={this.state} onPageChange={this.handlePageChange} />;
+      case 'Technician':
+        homepage = <HomeTechnician values={this.state} onPageChange={this.handlePageChange} />;
+      case 'Admin':
+        homepage = <HomeAdmin values={this.state} onPageChange={this.handlePageChange} />;
+      case 'Tester':
+        homepage = <HomeTester values={this.state} onPageChange={this.handlePageChange} />;
+      case 'Techtester':
+        homepage = <HomeTechTester values={this.state} onPageChange={this.handlePageChange} />;
+      default:
+        homepage = <HomeStudent values={this.state} onPageChange={this.handlePageChange} />;
+    }
+    
+
+
     return (
-      <Grommet theme={grommet} full>
+      <Grommet theme={customTheme} full>
         {/* Title Bar */}
         <Box fill>
         <AppBar> 
-          <Heading level='3' margin='none'>COVID Dashboard</Heading>
+    <Heading level='3' margin='none'>COVID Dashboard | {this.state.user_type} | {this.state.current_page} </Heading>
         </AppBar>
 
         {/* Main Body */}
-        <AggTestView>
-        </AggTestView>
+        <div>
+          {this.state.current_page === 'Home Page' && homepage}
+
+          {/* Possible For Students */}
+          {this.state.current_page === 'Aggregate Results' && <ViewAggregateResults values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'My Results' && <ViewMyResults values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Sign Up' && <CreateSignUp values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Daily Results' && <ViewDailyResults values={this.state} onPageChange={this.handlePageChange} />}
+        </div>
+        
+        
 
 
       </Box>
