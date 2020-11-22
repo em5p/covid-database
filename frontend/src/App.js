@@ -5,7 +5,7 @@ import { FormClose, Notification } from 'grommet-icons';
 const theme = {
   global: {
    colors: {
-     brand: '#228BE6',
+     brand: '#183256',
    },
     font: {
       family: 'Roboto',
@@ -35,7 +35,7 @@ const App = () => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <Grommet theme={theme} full>
+    <Grommet theme={theme} full themeMode="dark">
       <ResponsiveContext.Consumer>
         {size => (
           <Box fill>
@@ -51,7 +51,7 @@ const App = () => {
             <Box flex align='center' justify='center'>
               app body
           </Box>
-          {(!showSiderbar || size !== 'small') ? (
+          {(!showSidebar || size !== 'small') ? (
             <Collapsible direction="horizontal">
             <Box
               flex
