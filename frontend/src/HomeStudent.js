@@ -16,60 +16,70 @@ import {
 } from 'grommet';
 
 // Aggregate Test View
-const HomeStudent = (props) => {
+class HomeStudent extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.onPageChange = this.onPageChange.bind(this);
 
-  const [value, setValue] = React.useState({});
+  }
+
+  onPageChange() {
+    this.props.onPageChange('Home');
+  }
 
   // Hard Coding Options
 
-  return (
-    <Box 
-      direction='row'
-      align="center" 
-      alignContent="center" 
-      justify="center"
-      overflow={{ horizontal: 'hidden' }}>
-
-      
-      <Box
-        direction='column'
+  render() {
+    return (
+      <Box 
+        direction='row'
         align="center" 
         alignContent="center" 
         justify="center"
         overflow={{ horizontal: 'hidden' }}>
-        
-        <Button 
-        label="View My Results" 
-        margin="large"
-        onClick={() => {}} />
 
-        <Button 
-        label="Sign up For a Test" 
-        margin="large"
-        onClick={() => {}} />
         
+        <Box
+          direction='column'
+          align="center" 
+          alignContent="center" 
+          justify="center"
+          overflow={{ horizontal: 'hidden' }}>
+          
+          <Button 
+          label="View My Results" 
+          margin="large"
+          onClick={() => {this.props.onPageChange('My Results')}} />
+
+          <Button 
+          label="Sign up For a Test" 
+          margin="large"
+          onClick={() => {this.props.onPageChange('Sign Up')}} />
+          
+        </Box>
+        
+        <Box
+          direction='column'
+          align="center" 
+          alignContent="center" 
+          justify="center"
+          overflow={{ horizontal: 'hidden' }}>
+          
+          <Button 
+          label="View Aggregate Results" 
+          margin="large"
+          onClick={() => {this.props.onPageChange('Aggregate Results')}} />
+          
+          <Button 
+          label="View Daily Results" 
+          margin="large"
+          onClick={() => {this.props.onPageChange('Daily Results')}} />
+        </Box>
       </Box>
-      
-      <Box
-        direction='column'
-        align="center" 
-        alignContent="center" 
-        justify="center"
-        overflow={{ horizontal: 'hidden' }}>
-        
-        <Button 
-        label="View Aggregate Results" 
-        margin="large"
-        onClick={() => {}} />
-        
-        <Button 
-        label="View Daily Results" 
-        margin="large"
-        onClick={() => {}} />
-      </Box>
-    </Box>
-  );
+    );
+  }
+  
 }
 
 export default HomeStudent;

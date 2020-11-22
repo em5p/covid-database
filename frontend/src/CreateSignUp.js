@@ -16,9 +16,19 @@ import {
 } from 'grommet';
 
 // Aggregate Test View
-const AggTestView = (props) => {
+class CreateSignUp extends React.Component  {
+  constructor(props) {
+    super(props);
+    this.onPageChange = this.onPageChange.bind(this);
 
-  const columns = [
+  }
+
+  onPageChange() {
+    this.props.onPageChange('Home');
+  }
+
+  render() {
+    const columns = [
     {
       property: 'status',
       header: <Text>Test Status</Text>,
@@ -49,7 +59,6 @@ const AggTestView = (props) => {
     { status: 'Negative', total_tests: 6550, percent: 93.57},
     { status: 'Pending', total_tests: 0, percent: 0},
   ];
-  const [value, setValue] = React.useState({});
 
   // Hard Coding Options
   const location_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
@@ -64,12 +73,7 @@ const AggTestView = (props) => {
       justify="center"
       overflow={{ horizontal: 'hidden' }}>
 
-      <Form
-        value={value}
-        onChange={nextValue => setValue(nextValue)}
-        onReset={() => setValue({})}
-        onSubmit={({ value }) => {}}
-      >
+      <Form onSubmit={({ value }) => {}}>
         {/* Top Row */}
         <Box 
           direction="row" 
@@ -142,9 +146,11 @@ const AggTestView = (props) => {
       <Button 
         label="Go Home" 
         margin="large"
-        onClick={() => {}}/>
+        onClick={() => {this.props.onPageChange('Home Page')}}/>
     </Box>
   );
+  }
+  
 }
 
-export default AggTestView;
+export default CreateSignUp;
