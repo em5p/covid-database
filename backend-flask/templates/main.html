@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>DashBoard testing</title>
+</head>
+
+
+<!-- Accept a File Upload -->
+<form action="{{ url_for('main') }}" method="POST" enctype="multipart/form-data">
+  <fieldset>
+    <legend>Zoom Transcript Upload</legend>
+  
+
+    <br>
+    <label for="friendship_scale"> How Well do the Conversation Participants Know Eachother from 1 to 10?</label>
+    <input name="location" type="text" id="location">
+    <br>
+    <input name="submit" type="Submit">
+  </fieldset>
+</form>
+<br>
+
+</html>

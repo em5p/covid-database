@@ -71,7 +71,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grommet theme={grommet} full themeMode="dark">
+      <Grommet theme={grommet} full>
         {/* Title Bar */}
         <Box fill>
         <AppBar> 
@@ -82,7 +82,7 @@ class App extends React.Component {
         <AggTestView>
         </AggTestView>
 
-        
+
       </Box>
     </Grommet>
     );
