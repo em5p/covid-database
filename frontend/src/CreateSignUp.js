@@ -114,7 +114,6 @@ class CreateSignUp extends React.Component  {
                   placeholder: 'ap',
                 },
               ]}
-              value={value}
               onChange={() => {}}
               id="testing-select" 
               name="testing-select" />
