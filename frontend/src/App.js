@@ -19,6 +19,7 @@ import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
 import AggTestView from './AggTestView.js'
+import HomeStudent from './HomeStudent.js'
 
 /************** CONFIG and Input ********************/ 
 
@@ -63,6 +64,8 @@ class App extends React.Component {
         </AppBar>
 
         {/* Main Body */}
+
+
         <AggTestView props={'state'}>
         </AggTestView>
 
