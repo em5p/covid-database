@@ -74,7 +74,8 @@ class ViewMyResults extends React.Component  {
           direction="row" 
           gap="medium"
           justify="center"  
-          fill="horizontal">
+          fill="horizontal"
+          margin={{ top: 'medium' }}>
           <FormField name="location-select" htmlfor="location-select" label="Status:">
             <Select options={status_options} id="location-select" name="location-select" />
           </FormField>
@@ -117,7 +118,8 @@ class ViewMyResults extends React.Component  {
           direction="row" 
           gap="medium"
           justify="center"  
-          fill="horizontal">
+          fill="horizontal"
+          margin={{ top: 'medium' }}>
           <Button type="submit" primary label="Filter" />
           <Button type="reset" label="Reset" />
         </Box>

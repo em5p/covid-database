@@ -55,14 +55,14 @@ class ViewMyResults extends React.Component  {
     { date: '9/10/20', tests_processed: 100, positive_count: 8, positive_percent: 8.00},
   ];
 
-
   return (
     <Box 
       direction='column'
       align="center" 
       alignContent="center" 
       justify="center"
-      overflow={{ horizontal: 'hidden' }}>
+      overflow={{ horizontal: 'hidden' }}
+      margin={{ top: 'medium' }}>
 
 
 

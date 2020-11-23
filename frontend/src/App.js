@@ -19,6 +19,10 @@ import { FormClose, Home, Notification } from 'grommet-icons';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
+// Login
+import Login from './Login.js'
+import Register from './Register.js'
+
 // Views
 import ViewAggregateResults from './ViewAggregateResults.js'
 import ViewDailyResults from './ViewDailyResults.js'
@@ -33,6 +37,7 @@ import HomeAdmin from './HomeAdmin.js'
 import HomeTechnician from './HomeTechnician.js'
 import HomeTester from './HomeTester.js'
 import HomeTechTester from './HomeTechTester.js'
+import ExploreTestResult from './ExploreTestResult.js';
 
 /************** CONFIG and Input ********************/ 
 
@@ -67,10 +72,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'Home Page'
+      current_page: 'Explore Results'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +91,16 @@ class App extends React.Component {
     this.setState({current_page: page})
   }
   
+  handleLogin() {
+    this.setState({
+              // logged_in: True,
+              userType: 'Student'
+    })
+  }
+  
+  handleRegister() {
+    
+  }
   
 
   render() {
@@ -125,6 +141,9 @@ class App extends React.Component {
           {this.state.current_page === 'My Results' && <ViewMyResults values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Sign Up' && <CreateSignUp values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Daily Results' && <ViewDailyResults values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Login' && <Login values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Register' && <Register values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Explore Results' && <ExploreTestResult values={this.state} onPageChange={this.handlePageChange} />}
         </div>
         
         
