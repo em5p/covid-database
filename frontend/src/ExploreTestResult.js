@@ -58,20 +58,6 @@ class ExploreTestResult extends React.Component {
               },
             },
           };
-          const rows = [
-            { property: 'testID', header: <Text>Test ID #</Text>,},
-            { property: 'date_tested', header: <Text>Date Tested</Text>,},
-            { property: 'timeslot', header: <Text>Timeslot</Text>,},
-            { property: 'test_location', header: <Text>Testing Location</Text>,},
-            { property: 'date_processed', header: <Text>Date Processed</Text>,},
-            { property: 'pooled_result', header: <Text>Pooled Result</Text>,},
-            { property: 'individual_result', header: <Text>Individual Result</Text>,},
-            { property: 'processed_by', header: <Text>Processed By</Text>,}];
-
-          const sample_results = [{testID: 1}, {date_tested: '8/19/20'}, {timeslot: '2:00 PM'}, 
-            {test_location: 'West Campus'}, {date_processed: '8/20/20'},
-            {pooled_result: 'Positive'}, {individual_result: 'Negative'}, 
-            {processed_by: 'Bob Waters'}]
           const sample_data = [
             { col1: 'Test ID #', col2: 1},
             { col1: 'Date Tested', col2: '8/19/20'},
@@ -122,6 +108,10 @@ class ExploreTestResult extends React.Component {
                   
                 </TableBody>
               </Table>
+              <Button
+                label="Back(Home)" 
+                margin="large"
+                onClick={() => {this.props.onPageChange('Home Page')}}/>
             </Box>
           </Grommet>
           );
