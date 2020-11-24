@@ -72,7 +72,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'Explore Results'
+      current_page: 'Sign Up'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);

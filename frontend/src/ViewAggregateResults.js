@@ -61,9 +61,9 @@ class ViewAggregateResults extends React.Component  {
   ];
 
   // Hard Coding Options
-  const location_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
-  const housing_options = [];
-  const testing_site_options = [];
+  const location_options = ['West', 'East'];
+  const housing_options = ['Student Housing', 'Greek Housing', 'Off-Campus Housing', 'On-Campus Housing'];
+  const testing_site_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
 
   return (
     <Box 
@@ -79,7 +79,8 @@ class ViewAggregateResults extends React.Component  {
           direction="row" 
           gap="medium"
           justify="center"  
-          fill="horizontal">
+          fill="horizontal"
+          margin={{top: 'medium'}}>
           <FormField name="location-select" htmlfor="location-select" label="Location:">
             <Select options={location_options} id="location-select" name="location-select" />
           </FormField>
@@ -128,6 +129,7 @@ class ViewAggregateResults extends React.Component  {
             data={SAMPLE_DATA}
             step={10}
             onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
+            margin={{bottom: 'medium'}}
           />
         </Box>
         
@@ -145,7 +147,7 @@ class ViewAggregateResults extends React.Component  {
 
       <Button 
         label="Go Home" 
-        margin="large"
+        margin="medium"
         onClick={() => {this.props.onPageChange('Home Page')}}/>
     </Box>
   );
