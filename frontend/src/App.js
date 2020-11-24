@@ -32,6 +32,7 @@ import ViewMyResults from './ViewMyResults.js'
 import CreateSignUp from './CreateSignUp.js'
 import CreatePool from './CreatePool.js'
 import ProcessPool from './ProcessPool.js'
+import CreateAppointment from './CreateAppointment.js'
 
 // Homepages
 import HomeStudent from './HomeStudent.js'
@@ -76,7 +77,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'Process Pool'
+      current_page: 'Create Appointment'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -152,6 +153,7 @@ class App extends React.Component {
           {this.state.current_page === 'View Pools' && <ViewPools values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Create Pool' && <CreatePool values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Process Pool' && <ProcessPool values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Create Appointment' && <CreateAppointment values={this.state} onPageChange={this.handlePageChange} />}
         </div>
         
         
