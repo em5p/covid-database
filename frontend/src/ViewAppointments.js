@@ -15,8 +15,8 @@ import {
   TextInput,
 } from 'grommet';
 
-// Aggregate Test View
-class ViewAggregateResults extends React.Component  {
+// View appointments
+class ViewAppointments extends React.Component  {
   constructor(props) {
     super(props);
     this.onPageChange = this.onPageChange.bind(this);
@@ -30,129 +30,179 @@ class ViewAggregateResults extends React.Component  {
   render() {
     const columns = [
     {
-      property: 'status',
-      header: <Text>Test Status</Text>,
-      primary: true,
+        property: 'date',
+        header: 'Date',
     },
-    {property: 'total_tests',
-    header: 'Number of Total Tests',
+    {
+        property: 'time',
+        header: 'Time',
     },
-    {property: 'cases_percent',
-    header: 'Percent of Total Cases',
-    render: datum => (
-        <Box pad={{ vertical: 'xsmall' }}>
-          <Meter
-            values={[{ value: datum.percent }]}
-            thickness="small"
-            size="small"
-          />
-        </Box>
-      ),
+    {
+        property: 'test_site',
+        header: 'Test Site',
     },
-    {property: 'percent',
-    header: 'Percent of Total Cases',
+    {
+        property: 'location',
+        header: 'Location',
+    },
+    {
+        property: 'user',
+        header: 'User',
     }];
 
   const SAMPLE_DATA = [
-    { status: 'Total', total_tests: 7000, percent: 100},
-    { status: 'Positive', total_tests: 450, percent: 6.43},
-    { status: 'Negative', total_tests: 6550, percent: 93.57},
-    { status: 'Pending', total_tests: 0, percent: 0},
+    { date: '8/17/20', time: '10:00 AM', test_site: 'Bobby Dodd', location: 'East', user: 'student1'},
+    { date: '8/17/20', time: '11:00 AM', test_site: 'Bobby Dodd', location: 'East', user: '--'},
+    { date: '8/17/20', time: '12:00 PM', test_site: 'ECHO', location: 'East', user: 'student2'},
+    { date: '8/17/20', time: '1:00 PM', test_site: 'North Pole', location: 'West', user: '--'},
   ];
 
   // Hard Coding Options
-  const location_options = ['West', 'East'];
-  const housing_options = ['Student Housing', 'Greek Housing', 'Off-Campus Housing', 'On-Campus Housing'];
+  const show_tests=['Show booked only', 'Show available Only', 'Show all']
   const testing_site_options = ['Fulton County Board of Health', 'CCBOH WIC Clinic', 'Kennesaw State University', 'Stamps Health Services', 'Bobby Dodd Stadium', 'Caddell Building', 'Coda Building', 'GT Catholic Center', 'West Village', 'GT Connector', 'Curran St Parking Deck', 'North Avenue (Centenial Room)'];
 
   return (
     <Box 
-      direction='column'
-      align="center" 
-      alignContent="center" 
-      justify="center"
-      overflow={{ horizontal: 'hidden' }}>
+        direction='column'
+        align="center" 
+        alignContent="center" 
+        justify="center"
+        overflow={{ horizontal: 'hidden' }}>
 
-      <Form onSubmit={({ value }) => {}}>
-        {/* Top Row */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal"
-          margin={{top: 'medium'}}>
-          <FormField name="location-select" htmlfor="location-select" label="Location:">
-            <Select options={location_options} id="location-select" name="location-select" />
-          </FormField>
+        <Text margin={{top:'small'}} size='large' weight='bold'>View Appointments</Text>
+            
+        <Form onSubmit={({ value }) => {}}>
+            {/* Top Row */}
 
-          <FormField name="housing-select" htmlfor="housing-select" label="Housing:">
-            <Select options={housing_options} id="housing-select" name="housing-select" />
-          </FormField>
+            {/* Date Selection */}
+            <Box 
+            direction="row" 
+            gap="medium"
+            justify="center"  
+            fill="horizontal">
+            <FormField name="date-start" htmlfor="date-start" label="Date Start:">
+                <DateInput
+                format="mm/dd/yyyy"
+                value={(new Date()).toISOString()}
+                onChange={({ value }) => {}}
+                />
+            </FormField>
 
-          <FormField name="testing-select" htmlfor="testing-select" label="Testing Sites:">
-            <Select options={testing_site_options} id="testing-select" name="testing-select" />
-          </FormField>
-        </Box>
+            <FormField name="date-end" htmlfor="date-end" label="Date End:">
+                <DateInput
+                format="mm/dd/yyyy"
+                value={(new Date()).toISOString()}
+                onChange={({ value }) => {}}
+                />
+            </FormField> 
+            <FormField name="time-start" htmlfor="time-start" label="Time Start:">
+                <MaskedInput
+                mask={[
+                    {
+                    length: [1, 2],
+                    options: Array.from({ length: 12 }, (v, k) => k + 1),
+                    regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                    placeholder: 'hh',
+                    },
+                    { fixed: ':' },
+                    {
+                    length: 2,
+                    options: ['00', '15', '30', '45'],
+                    regexp: /^[0-5][0-9]$|^[0-9]$/,
+                    placeholder: 'mm',
+                    },
+                    { fixed: ' ' },
+                    {
+                    length: 2,
+                    options: ['am', 'pm'],
+                    regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
+                    placeholder: 'ap',
+                    },
+                ]}
+                onChange={event => this.setState({ time: event.target.value })}
+                id="time-start" 
+                name="time-start" />
+            </FormField>
 
-        {/* Date Selection */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal">
-          <FormField name="date-start" htmlfor="date-start" label="Date Processed Start:">
-            <DateInput
-              format="mm/dd/yyyy"
-              value={(new Date()).toISOString()}
-              onChange={({ value }) => {}}
+            <FormField name="time-end" htmlfor="time-end" label="Time End:">
+                <MaskedInput
+                mask={[
+                    {
+                    length: [1, 2],
+                    options: Array.from({ length: 12 }, (v, k) => k + 1),
+                    regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                    placeholder: 'hh',
+                    },
+                    { fixed: ':' },
+                    {
+                    length: 2,
+                    options: ['00', '15', '30', '45'],
+                    regexp: /^[0-5][0-9]$|^[0-9]$/,
+                    placeholder: 'mm',
+                    },
+                    { fixed: ' ' },
+                    {
+                    length: 2,
+                    options: ['am', 'pm'],
+                    regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
+                    placeholder: 'ap',
+                    },
+                ]}
+                onChange={event => this.setState({ time: event.target.value })}
+                id="time-end" 
+                name="time-end" />
+            </FormField> 
+            </Box>
+            <Box 
+            direction="row" 
+            gap="medium"
+            justify="center"  
+            margin={{top: 'medium'}}>
+            <FormField name="testing-select" htmlfor="testing-select" label="Testing Sites:">
+                <Select options={testing_site_options} id="testing-select" name="testing-select" />
+            </FormField>
+
+            <FormField name="testing-select" htmlfor="testing-select" label="Availability:">
+                <RadioButtonGroup
+                    name='show-tests' 
+                    options={show_tests} direction='horizontal'/>
+            </FormField>
+            </Box>
+
+            {/* Present Data */}
+            <Box 
+            direction="row" 
+            gap="medium"
+            justify="center"  
+            fill="horizontal">
+            
+            <DataTable
+                columns={columns}
+                data={SAMPLE_DATA}
+                step={10}
+                onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
+                margin={{bottom: 'medium'}}
             />
-          </FormField>
+            </Box>
 
-          <FormField name="date-end" htmlfor="date-end" label="Date Processed End:">
-            <DateInput
-              format="mm/dd/yyyy"
-              value={(new Date()).toISOString()}
-              onChange={({ value }) => {}}
-            />
-          </FormField>  
-        </Box>
-
-        {/* Present Data */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal">
-        
-          <DataTable
-            columns={columns}
-            data={SAMPLE_DATA}
-            step={10}
-            onClickRow={event => alert(JSON.stringify(event.datum, null, 2))}
-            margin={{bottom: 'medium'}}
-          />
-        </Box>
-        
-
-        {/* Buttons */}
-        <Box 
-          direction="row" 
-          gap="medium"
-          justify="center"  
-          fill="horizontal">
-          <Button type="submit" primary label="Filter" />
-          <Button type="reset" label="Reset" />
-        </Box>
-      </Form>
-
-      <Button 
-        label="Go Home" 
-        margin="medium"
-        onClick={() => {this.props.onPageChange('Home Page')}}/>
+            {/* Buttons */}
+            <Box 
+            direction="row" 
+            gap="medium"
+            justify="center"  
+            fill="horizontal">
+            <Button 
+                label="Go Home" 
+                margin="medium"
+                onClick={() => {this.props.onPageChange('Home Page')}}/>
+            <Button type="submit" label="Filter" margin="medium"/>
+            <Button type="reset" label="Reset" margin="medium"/>
+            </Box>
+        </Form>
     </Box>
   );
   }
   
 }
 
-export default ViewAggregateResults;
+export default ViewAppointments;

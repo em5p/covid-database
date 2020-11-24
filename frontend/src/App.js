@@ -27,6 +27,7 @@ import Register from './Register.js'
 import ViewAggregateResults from './ViewAggregateResults.js'
 import ViewDailyResults from './ViewDailyResults.js'
 import ViewMyResults from './ViewMyResults.js'
+import ViewAppointments from './ViewAppointments.js'
 
 // Creation Pages
 import CreateSignUp from './CreateSignUp.js'
@@ -77,7 +78,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'Create Appointment'
+      current_page: 'View Appointments'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -154,6 +155,7 @@ class App extends React.Component {
           {this.state.current_page === 'Create Pool' && <CreatePool values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Process Pool' && <ProcessPool values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Create Appointment' && <CreateAppointment values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'View Appointments' && <ViewAppointments values={this.state} onPageChange={this.handlePageChange} />}
         </div>
         
         
