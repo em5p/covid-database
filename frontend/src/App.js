@@ -73,7 +73,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'Lab Tech Tests Processed'
+      current_page: 'Lab Tech Tests'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -145,7 +145,7 @@ class App extends React.Component {
           {this.state.current_page === 'Login' && <Login values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Register' && <Register values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Explore Results' && <ExploreTestResult values={this.state} onPageChange={this.handlePageChange} />}
-          {this.state.current_page === 'Lab Tech Tests Processed' && <ViewLabTechTestsProcessed values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Lab Tech Tests' && <ViewLabTechTestsProcessed values={this.state} onPageChange={this.handlePageChange} />}
         </div>
         
         

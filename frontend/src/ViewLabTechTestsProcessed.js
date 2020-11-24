@@ -70,6 +70,8 @@ class ViewLabTechTestsProcessed extends React.Component  {
       justify="center"
       overflow={{ horizontal: 'hidden' }}>
 
+        <Text margin={{top: 'small'}} size='large' weight='bold'>Lab Tech Tests Processed</Text>
+
       <Form onSubmit={({ value }) => {}}>
         {/* Top Row */}
         <Box 
