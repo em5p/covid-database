@@ -5,6 +5,7 @@ import {
   RadioButton,
   Text,
   TextInput,
+  Form
 } from 'grommet';
 
 // Create Pool
@@ -45,15 +46,7 @@ class CreatePool extends React.Component  {
     ];
 
     return (
-        <Box 
-            align='center'
-            alignContent='center'>
 
-            <Text size='xlarge' weight='bold' margin={{vertical:'medium'}}>Create a Pool</Text>
-            <Box width='45px' fill='false' direction='row' >
-                <Text>Pool ID:</Text>
-                <TextInput placeholder='pool id must be unique'/>
-            </Box>
             <Box 
                 direction='row'
                 align="center" 
@@ -61,6 +54,17 @@ class CreatePool extends React.Component  {
                 justify="center"
                 overflow={{ horizontal: 'hidden' }}
                 margin={{ top: 'medium' }}>
+
+                <Form onSubmit={({ value }) => {}}>
+                <Box 
+                    align='center'
+                    alignContent='center'>
+
+                    <Text size='xlarge' weight='bold' margin={{vertical:'medium'}}>Create a Pool</Text>
+                    <Box fill='false' direction='row' >
+                        <Text>Pool ID:</Text>
+                        <TextInput placeholder='pool id must be unique'/>
+                    </Box>
 
                 {/* Present Data */}
                 <Box>
@@ -91,8 +95,9 @@ class CreatePool extends React.Component  {
             </Box>
 
             {/* Buttons */}
-            
+            </Form>
         </Box>
+
     );
     }
     
