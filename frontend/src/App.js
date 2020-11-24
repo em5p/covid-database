@@ -38,6 +38,7 @@ import HomeTechnician from './HomeTechnician.js'
 import HomeTester from './HomeTester.js'
 import HomeTechTester from './HomeTechTester.js'
 import ExploreTestResult from './ExploreTestResult.js';
+import ViewLabTechTestsProcessed from './ViewLabTechTestsProcessed.js';
 
 /************** CONFIG and Input ********************/ 
 
@@ -72,7 +73,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'Sign Up'
+      current_page: 'Lab Tech Tests Processed'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -144,6 +145,7 @@ class App extends React.Component {
           {this.state.current_page === 'Login' && <Login values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Register' && <Register values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Explore Results' && <ExploreTestResult values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Lab Tech Tests Processed' && <ViewLabTechTestsProcessed values={this.state} onPageChange={this.handlePageChange} />}
         </div>
         
         
