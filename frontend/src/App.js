@@ -28,12 +28,17 @@ import ViewAggregateResults from './ViewAggregateResults.js'
 import ViewDailyResults from './ViewDailyResults.js'
 import ViewMyResults from './ViewMyResults.js'
 import ViewAppointments from './ViewAppointments.js'
+import ExploreTestResult from './ExploreTestResult.js';
+import ViewLabTechTestsProcessed from './ViewLabTechTestsProcessed.js';
+import ViewPools from './ViewPools.js';
 
 // Creation Pages
 import CreateSignUp from './CreateSignUp.js'
 import CreatePool from './CreatePool.js'
 import ProcessPool from './ProcessPool.js'
 import CreateAppointment from './CreateAppointment.js'
+import ReassignTester from './ReassignTester'
+import CreateTestingSite from './CreateTestingSite.js';
 
 // Homepages
 import HomeStudent from './HomeStudent.js'
@@ -41,9 +46,8 @@ import HomeAdmin from './HomeAdmin.js'
 import HomeTechnician from './HomeTechnician.js'
 import HomeTester from './HomeTester.js'
 import HomeTechTester from './HomeTechTester.js'
-import ExploreTestResult from './ExploreTestResult.js';
-import ViewLabTechTestsProcessed from './ViewLabTechTestsProcessed.js';
-import ViewPools from './ViewPools.js';
+
+
 
 /************** CONFIG and Input ********************/ 
 
@@ -78,7 +82,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user_type: 'Student',
-      current_page: 'View Appointments'
+      current_page: 'Create Testing Site'
     }
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -156,6 +160,8 @@ class App extends React.Component {
           {this.state.current_page === 'Process Pool' && <ProcessPool values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'Create Appointment' && <CreateAppointment values={this.state} onPageChange={this.handlePageChange} />}
           {this.state.current_page === 'View Appointments' && <ViewAppointments values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Reassign Tester' && <ReassignTester values={this.state} onPageChange={this.handlePageChange} />}
+          {this.state.current_page === 'Create Testing Site' && <CreateTestingSite values={this.state} onPageChange={this.handlePageChange} />}
         </div>
         
         
